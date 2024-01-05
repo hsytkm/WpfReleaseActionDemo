@@ -6,7 +6,6 @@ env:
   App_Name: WpfReleaseActionDemo
   Solution_Path: WpfReleaseActionDemo.sln
   App_Project_Path: src/WpfDemo.App/WpfDemo.App.csproj
-  Test_Directory: tests/WpfDemo.Test
 
 jobs:
   build:
