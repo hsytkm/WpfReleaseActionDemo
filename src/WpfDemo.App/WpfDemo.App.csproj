@@ -7,7 +7,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-  </PropertyGroup>
+
+    <!-- VerはActionsにより自動で設定されます。以下で明示的に設定することもできます。
+    <Version>1.2.3</Version>
+    <FileVersion>4.5.6</FileVersion>
+    -->
+    </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WpfDemo.Model\WpfDemo.Model.csproj" />

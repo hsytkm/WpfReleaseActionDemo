@@ -58,13 +58,18 @@ jobs:
     if: "contains( github.ref , 'tags/v')"
 
     steps:
-      - name: echos
+      - name: Get version
         shell: bash
         run: |
-          echo $RELEASE_VERSION
-          echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
-          echo "app_x64_framework_name=${{ env.App_Name }}_win-x64_framework-dependent_ver${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
-          echo "app_x64_self_name=${{ env.App_Name }}_win-x64_self-contained_ver${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+          echo "ver=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+
+      - name: Set env
+        shell: bash
+        run: |
+          echo "version=${{ env.ver }}" >> $GITHUB_ENV          # exeに反映されます
+          # echo "fileversion=${{ env.ver }}" >> $GITHUB_ENV    # 未設定だとVersionに連動します
+          echo "app_x64_framework_name=${{ env.App_Name }}_win-x64_framework-dependent_ver${{ env.ver }}" >> $GITHUB_ENV
+          echo "app_x64_self_name=${{ env.App_Name }}_win-x64_self-contained_ver${{ env.ver }}" >> $GITHUB_ENV
 
       # Checks-out repository under $GITHUB_WORKSPACE: https://github.com/actions/checkout
       - name: Checkout
@@ -116,8 +121,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ env.version }}
-          name: Ver ${{ env.version }}
+          tag: v${{ env.ver }}
+          name: Ver ${{ env.ver }}
           body: |
             - Change design
             - Bug fix
